@@ -33,14 +33,45 @@
 </template>
 
 <script lang="ts">
-import AppUtil from './AppUtil';
+// import ArrayUtils from '@/libs/tk90755/utils/ArrayUtils';
+// import DateUtils from '@/libs/tk90755/utils/DateUtils';
+import MathUtils from '@/libs/tk90755/utils/MathUtils';
 import { defineComponent } from "vue";
 export default defineComponent({
   setup():void{
-    console.log("-- HelloWorld -------");
-    const appUtil:AppUtil = new AppUtil()
-    appUtil.test()
-    console.log("-- HelloWorld -------");
+    // console.log(ArrayUtils.findMax([1,2,3,4,5,6,7,8,9]));
+    // console.log(ArrayUtils.findMin([1,2,3,4,5,6,7,8,9]));
+    // // console.log(ArrayUtils.shuffle([1,2,3,4,5,6,7,8,9]));
+    // console.log(ArrayUtils.shuffleNumbers([1,2,3,4,5,6,7,8,9]));
+    // console.log(ArrayUtils.shuffleStrings(["1","2","3","4","5","6","7","8","9"]));
+    // // console.log(ArrayUtils.inverse(["1","2","3","4","5","6","7","8","9"]));
+    // console.log(ArrayUtils.inverseNumbers([1,2,3,4,5,6,7,8,9]));
+    // console.log(ArrayUtils.inverseStrings(["1","2","3","4","5","6","7","8","9"]));
+    // // console.log(ArrayUtils.random(["1","2","3","4","5","6","7","8","9"]));
+    // console.log(ArrayUtils.randomNumber([1,2,3,4,5,6,7,8,9]));
+    // // console.log(ArrayUtils.isContain([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)); // true
+    // // console.log(ArrayUtils.isContain([1, 2, 3, 4, 5, 6, 7, 8, 9], 10)); // false
+    // // console.log(ArrayUtils.isContain(["A", "B"], "A")); // true
+    // // console.log(ArrayUtils.isContain(["A", "B"], "C")); // false
+    // console.log(ArrayUtils.isContainInNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)); // true
+    // console.log(ArrayUtils.isContainInNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9], 10)); // false
+    // console.log(ArrayUtils.isContainInStrings(["A", "B"], "A")); // true
+    // console.log(ArrayUtils.isContainInStrings(["A", "B"], "C")); // false
+    // console.log(DateUtils.unixTime());
+    // console.log(DateUtils.unixTime(new Date( 2012, 11, 5, 3, 15, 30 ))); //1354644930000
+    // console.log(MathUtils.sign(46));  //  1 
+    // console.log(MathUtils.sign(-34)); // -1
+    // console.log(MathUtils.fract(46.39)); //0.39
+    // let i = 0;
+    // setInterval(() => {
+    //   i += 0.1;
+    //   MathUtils.omitFloat(i,1000);
+    // }, 100);
+    // console.log(MathUtils.factorial(4)); //
+    // console.log(MathUtils.inRange(12,10,20)); //true
+    // console.log(MathUtils.inRange(21,10,20)); //false
+    // console.log(MathUtils.normalize(50,0,100)); //0.5
+    // console.log(MathUtils.normalize(21,10,20)); //1.1
   }
 });
 
