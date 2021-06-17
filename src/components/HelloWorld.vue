@@ -35,7 +35,8 @@
 <script lang="ts">
 // import ArrayUtils from '@/libs/tk90755/utils/ArrayUtils';
 // import DateUtils from '@/libs/tk90755/utils/DateUtils';
-import MathUtils from '@/libs/tk90755/utils/MathUtils';
+// import MathUtils from '@/libs/tk90755/utils/MathUtils';
+import Event from '@/libs/tk90755/events/Event';
 import { defineComponent } from "vue";
 export default defineComponent({
   setup():void{
@@ -44,15 +45,20 @@ export default defineComponent({
     // // console.log(ArrayUtils.shuffle([1,2,3,4,5,6,7,8,9]));
     // console.log(ArrayUtils.shuffleNumbers([1,2,3,4,5,6,7,8,9]));
     // console.log(ArrayUtils.shuffleStrings(["1","2","3","4","5","6","7","8","9"]));
-    // // console.log(ArrayUtils.inverse(["1","2","3","4","5","6","7","8","9"]));
+    // console.log(ArrayUtils.inverse<string>(["1","2","3","4","5","6","7","8","9"]));
+    // console.log(ArrayUtils.inverse<number>([1,2,3,4,5,6,7,8,9]));
+    // console.log(ArrayUtils.inverse<number|string>([1,2,"3",4,5,6,7,8,9]));
     // console.log(ArrayUtils.inverseNumbers([1,2,3,4,5,6,7,8,9]));
     // console.log(ArrayUtils.inverseStrings(["1","2","3","4","5","6","7","8","9"]));
-    // // console.log(ArrayUtils.random(["1","2","3","4","5","6","7","8","9"]));
+    // console.log(ArrayUtils.random<string>(["1","2","3","4","5","6","7","8","9"])); // ["9", "8", "7", "6", "5", "4", "3", "2", "1"]
+    // console.log(ArrayUtils.random<number>([1,2,3,4,5,6,7,8,9]));                   // [9, 8, 7, 6, 5, 4, 3, 2, 1]
+    // console.log(ArrayUtils.random<number|string>([1,2,"3",4,5,6,7,8,9]));          // [9, 8, 7, 6, 5, 4, "3", 2, 1]
     // console.log(ArrayUtils.randomNumber([1,2,3,4,5,6,7,8,9]));
-    // // console.log(ArrayUtils.isContain([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)); // true
-    // // console.log(ArrayUtils.isContain([1, 2, 3, 4, 5, 6, 7, 8, 9], 10)); // false
-    // // console.log(ArrayUtils.isContain(["A", "B"], "A")); // true
-    // // console.log(ArrayUtils.isContain(["A", "B"], "C")); // false
+    // console.log(ArrayUtils.isContain<number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)); // true
+    // console.log(ArrayUtils.isContain<number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 10)); // false
+    // console.log(ArrayUtils.isContain<string>(["A", "B"], "A")); // true
+    // console.log(ArrayUtils.isContain<string>(["A", "B"], "C")); // false
+    // console.log(ArrayUtils.isContain<string|number>(["A", "B"], 99)); // false
     // console.log(ArrayUtils.isContainInNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)); // true
     // console.log(ArrayUtils.isContainInNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9], 10)); // false
     // console.log(ArrayUtils.isContainInStrings(["A", "B"], "A")); // true
@@ -72,6 +78,7 @@ export default defineComponent({
     // console.log(MathUtils.inRange(21,10,20)); //false
     // console.log(MathUtils.normalize(50,0,100)); //0.5
     // console.log(MathUtils.normalize(21,10,20)); //1.1
+    const event:Event = new Event("aaa");
   }
 });
 

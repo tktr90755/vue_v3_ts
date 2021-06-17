@@ -75,16 +75,18 @@ export default class ArrayUtils {
    * @param {array} ary 反転する配列
    * @return {array} 配列を反転して返す
    * @example 
-    console.log(ArrayUtils.inverse(["1","2","3","4","5","6","7","8","9"])); //["9", "8", "7", "6", "5", "4", "3", "2", "1"]
+    console.log(ArrayUtils.inverse<string>(["1","2","3","4","5","6","7","8","9"])); // ["9", "8", "7", "6", "5", "4", "3", "2", "1"]
+    console.log(ArrayUtils.inverse<number>([1,2,3,4,5,6,7,8,9]));                   // [9, 8, 7, 6, 5, 4, 3, 2, 1]
+    console.log(ArrayUtils.inverse<number|string>([1,2,"3",4,5,6,7,8,9]));          // [9, 8, 7, 6, 5, 4, "3", 2, 1]
    */
-  // static inverse(ary: any): Array<any> {
-  //   const ret:Array<any> = new Array<any>();
-  //   const len:number = ary.length;
-  //   for (let i = 0; i < len; i++) {
-  //     ret[i] = ary[len - 1 - i];
-  //   }
-  //   return ret;
-  // }
+  static inverse<T>(ary: Array<T>): Array<T> {
+    const ret: Array<T> = new Array<T>();
+    const len: number = ary.length;
+    for (let i = 0; i < len; i++) {
+      ret[i] = ary[len - 1 - i];
+    }
+    return ret;
+  }
 
   /**
    * Number型の配列を反転して返す
@@ -93,7 +95,7 @@ export default class ArrayUtils {
    * @param {array} number 反転する配列
    * @return {array} number 配列を反転して返す
    * @example 
-    console.log(ArrayUtils.inverseNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9])); //[9, 8, 7, 6, 5, 4, 3, 2, 1]
+    console.log(ArrayUtils.inverseNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9])) //[9, 8, 7, 6, 5, 4, 3, 2, 1]
    */
   static inverseNumbers(ary: Array<number>): Array<number> {
     const ret: Array<number> = new Array<number>();
@@ -111,7 +113,7 @@ export default class ArrayUtils {
    * @param {array} string 反転する配列
    * @return {array} string 配列を反転して返す
    * @example 
-    console.log(ArrayUtils.inverseStrings(["1","2","3","4","5","6","7","8","9"])); //["9", "8", "7", "6", "5", "4", "3", "2", "1"]
+    console.log(ArrayUtils.inverseStrings(["1","2","3","4","5","6","7","8","9"])) //["9", "8", "7", "6", "5", "4", "3", "2", "1"]
    */
   static inverseStrings(ary: Array<string>): Array<string> {
     const ret: Array<string> = new Array<string>();
@@ -129,11 +131,13 @@ export default class ArrayUtils {
    * @param {array} ary 値を返す配列
    * @return {any} ランダムな値
    * @example 
-    console.log(ArrayUtils.random(["1","2","3","4","5","6","7","8","9"]));
+    console.log(ArrayUtils.random<string>(["1","2","3","4","5","6","7","8","9"]))
+    console.log(ArrayUtils.random<number>([1,2,3,4,5,6,7,8,9]))
+    console.log(ArrayUtils.random<number|string>([1,2,"3",4,5,6,7,8,9]))
    */
-  // static random(ary: Array<any>): any {
-  //   return ary[(Math.random() * ary.length) >> 0] as any;
-  // }
+  static random<T>(ary: Array<T>): T {
+    return ary[(Math.random() * ary.length) >> 0];
+  }
 
   /**
    * Number型の配列からランダムな値を返す
@@ -169,14 +173,15 @@ export default class ArrayUtils {
    * @param {array} value ジャッジ
    * @return {boolean} 
    * @example 
-    console.log(ArrayUtils.isContains([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)); // true
-    console.log(ArrayUtils.isContains([1, 2, 3, 4, 5, 6, 7, 8, 9], 10)); // false
-    console.log(ArrayUtils.isContains(["A", "B"], "A")); // true
-    console.log(ArrayUtils.isContains(["A", "B"], "C")); // false
+    console.log(ArrayUtils.isContain<number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)); // true
+    console.log(ArrayUtils.isContain<number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 10)); // false
+    console.log(ArrayUtils.isContain<string>(["A", "B"], "A")); // true
+    console.log(ArrayUtils.isContain<string>(["A", "B"], "C")); // false
+    console.log(ArrayUtils.isContain<string|number>(["A", "B"], 99)); // false
    */
-  // static isContain(ary: Array<any>, value: any): any {
-  //   return ary.indexOf(value) != -1;
-  // }
+  static isContain<T>(ary: Array<T>, value: T): boolean {
+    return ary.indexOf(value) != -1;
+  }
 
   /**
    * Number型の指定した要素を含んでいるかどうかを判定する
@@ -204,7 +209,7 @@ export default class ArrayUtils {
     console.log(ArrayUtils.isContainInStrings(["A", "B"], "A")); // true
     console.log(ArrayUtils.isContainInStrings(["A", "B"], "C")); // false
    */
-    static isContainInStrings(ary: Array<string>, value: string): boolean {
-      return ary.indexOf(value) != -1;
-    }
+  static isContainInStrings(ary: Array<string>, value: string): boolean {
+    return ary.indexOf(value) != -1;
+  }
 }
