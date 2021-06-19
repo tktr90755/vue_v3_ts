@@ -36,8 +36,8 @@
 // import ArrayUtils from '@/libs/tk90755/utils/ArrayUtils';
 // import DateUtils from '@/libs/tk90755/utils/DateUtils';
 // import MathUtils from '@/libs/tk90755/utils/MathUtils';
-import Event from '@/libs/tk90755/events/Event';
-import EventDispatcher from '@/libs/tk90755/events/EventDispatcher';
+// import Event from '@/libs/tk90755/events/Event';
+// import EventDispatcher from '@/libs/tk90755/events/EventDispatcher';
 import { defineComponent } from "vue";
 export default defineComponent({
   setup():void{
@@ -79,9 +79,10 @@ export default defineComponent({
     // console.log(MathUtils.inRange(21,10,20)); //false
     // console.log(MathUtils.normalize(50,0,100)); //0.5
     // console.log(MathUtils.normalize(21,10,20)); //1.1
-    const event:Event = new Event("aaa")
-    event.currentTarget = new EventDispatcher()
-    console.log(event);
+    // const event:Event = new Event("aaa")
+    // event.currentTarget = new EventDispatcher()
+    // console.log(event);
+
   }
 });
 

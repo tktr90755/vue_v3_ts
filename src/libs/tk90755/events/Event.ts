@@ -9,7 +9,7 @@
  * @update
  *
  */
-import EventDispatcher from "./EventDispatcher"; // @ is an alias to /src
+import EventDispatcher from "./EventDispatcher"
 export default class Event {
   //   constructor(type:string, origin, bubbles, cancelable) {
   //     if (type === null || type === undefined) {
@@ -41,5 +41,51 @@ export default class Event {
   }
   set currentTarget(value: EventDispatcher) {
     this._currentTarget = value;
+  }
+
+  get type(): string {
+    return this._type;
+  }
+
+  // __________________________________________________________________________________
+  // event types
+  static INIT(): string {
+    return "init";
+  }
+  static START(): string {
+    return "start";
+  }
+  static UPDATE(): string {
+    return "update";
+  }
+  static COMPLETE(): string {
+    return "complete";
+  }
+
+  static ERROR(): string {
+    return "error";
+  }
+  static IO_ERROR(): string {
+    return "ioError";
+  }
+  static SECURITY_ERROR(): string {
+    return "securityError";
+  }
+
+  static CHANGE(): string {
+    return "change";
+  }
+  static CANCEL(): string {
+    return "cancel";
+  }
+  static RENDER(): string {
+    return "render";
+  }
+
+  static RESIZE(): string {
+    return "resize";
+  }
+  static TICKER(): string {
+    return "ticker";
   }
 }
