@@ -1,5 +1,5 @@
 /**
- * Copyright 2014, "tktr90755" All rights reserved.
+ * Copyright 2021, "tktr90755" All rights reserved.
  * Proprietary and Confidential
  * Do not redistribute
  *
@@ -9,23 +9,10 @@
  * @update
  *
  */
-import EventDispatcher from "./EventDispatcher"
+import EventDispatcher from "./EventDispatcher";
 export default class Event {
-  //   constructor(type:string, origin, bubbles, cancelable) {
-  //     if (type === null || type === undefined) {
-  //       throw new Error("Have to set Event Type.");
-  //     }
-  //     this._type = type;
-  //     this._origin = origin || null;
-  //     this._bubbles = typeof bubbles === "boolean" ? bubbles : false;
-  //     this._cancelable = typeof cancelable === "boolean" ? cancelable : false;
-  //     this._currentTarget;
-
-  //     this.flags;
-  //     this.preventDefaults;
-  //   }
-
   private _type: string;
+
   constructor(_type: string) {
     if (_type === null || _type === undefined) {
       throw new Error("Have to set Event Type.");
@@ -49,43 +36,43 @@ export default class Event {
 
   // __________________________________________________________________________________
   // event types
-  static INIT(): string {
+  static get INIT(): string {
     return "init";
   }
-  static START(): string {
+  static get START(): string {
     return "start";
   }
-  static UPDATE(): string {
+  static get UPDATE(): string {
     return "update";
   }
-  static COMPLETE(): string {
+  static get COMPLETE(): string {
     return "complete";
   }
 
-  static ERROR(): string {
+  static get ERROR(): string {
     return "error";
   }
-  static IO_ERROR(): string {
+  static get IO_ERROR(): string {
     return "ioError";
   }
-  static SECURITY_ERROR(): string {
+  static get SECURITY_ERROR(): string {
     return "securityError";
   }
 
-  static CHANGE(): string {
+  static get CHANGE(): string {
     return "change";
   }
-  static CANCEL(): string {
+  static get CANCEL(): string {
     return "cancel";
   }
-  static RENDER(): string {
+  static get RENDER(): string {
     return "render";
   }
 
-  static RESIZE(): string {
+  static get RESIZE(): string {
     return "resize";
   }
-  static TICKER(): string {
+  static get TICKER(): string {
     return "ticker";
   }
 }

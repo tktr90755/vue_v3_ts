@@ -37,7 +37,10 @@
 // import DateUtils from '@/libs/tk90755/utils/DateUtils';
 // import MathUtils from '@/libs/tk90755/utils/MathUtils';
 // import Event from '@/libs/tk90755/events/Event';
-// import EventDispatcher from '@/libs/tk90755/events/EventDispatcher';
+import EventDispatcher from '@/libs/tk90755/events/EventDispatcher';
+import Command from '@/libs/tk90755/commands/Command';
+import ParallelList from '@/libs/tk90755/commands/ParallelList';
+// import {Callback, ommandObject} from '@/libs/tk90755/commands/CommandObject'
 import { defineComponent } from "vue";
 export default defineComponent({
   setup():void{
@@ -80,9 +83,18 @@ export default defineComponent({
     // console.log(MathUtils.normalize(50,0,100)); //0.5
     // console.log(MathUtils.normalize(21,10,20)); //1.1
     // const event:Event = new Event("aaa")
-    // event.currentTarget = new EventDispatcher()
-    // console.log(event);
-
+    const dispatcher:EventDispatcher = new EventDispatcher()
+    // console.log(dispatcher);
+    const parallelList:ParallelList = new ParallelList("testSerialList");
+    // parallelList._onCompleteHandler(new Event("aa"))
+    parallelList.push([
+      new Command( ()=>{console.log("func1Dispatch")}, dispatcher, "func1Dispatch",1  ),
+      new Command( ()=>{console.log("func2Dispatch")}, dispatcher, "func2Dispatch",1  )
+    ])
+    parallelList.execute()
+    // com.start()
+    // com.finish()
+    // com.concat<Arr>([1,2,3,3,4])
   }
 });
 

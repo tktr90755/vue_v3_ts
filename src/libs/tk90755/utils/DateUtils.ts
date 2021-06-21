@@ -1,3 +1,13 @@
+/**
+ * Copyright 2021, "tktr90755" All rights reserved.
+ * Proprietary and Confidential
+ * Do not redistribute
+ *
+ * @title tktr90755.utils.DateUtils.ts
+ * @author
+ * @version 0.1.0
+ * @update
+*/
 export default class DateUtils {
   constructor() {
     throw new Error("DateUtils is class only of static method.");
