@@ -28,9 +28,15 @@
 */
 import Event from "./Event";
 export default class EventDispatcher {
+  private _currentTarget: EventDispatcher = this;
   private listeners: { [name: string]: Array<(e: Event) => void> } = {};
+  private _listener: (e: Event) => void;
 
-  // constructor() {}
+  constructor() {
+    this._listener = (e: Event) => {
+      console.log(e);
+    };
+  }
 
   addEventListener(type: string, listener: (e: Event) => void): void {
     if (type === undefined) {
@@ -41,6 +47,7 @@ export default class EventDispatcher {
     }
     if (typeof listener === "function") {
       this.listeners[type].push(listener);
+      this._listener = listener;
     } else {
       throw new Error("listener is not a function.");
     }
@@ -102,8 +109,11 @@ export default class EventDispatcher {
 
   // __________________________________________________________________________________
   // getter & setter
-  private _currentTarget: EventDispatcher = this;
   get currentTarget(): EventDispatcher {
     return this._currentTarget;
+  }
+
+  get listener(): (e: Event) => void {
+    return this._listener;
   }
 }

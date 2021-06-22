@@ -21,7 +21,7 @@ export default class CommandObject extends EventDispatcher {
     return this._name;
   }
 
-  get length():number{
+  get length(): number {
     return 0;
   }
 }

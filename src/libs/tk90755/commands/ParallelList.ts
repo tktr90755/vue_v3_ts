@@ -18,7 +18,6 @@ export default class ParallelList extends CommandObject {
   private _numCompleted: number;
   private _isRunning: boolean;
   private _isComplete: boolean;
-  //   private _count: number;
   constructor(name: string) {
     super(
       name === undefined
@@ -30,7 +29,6 @@ export default class ParallelList extends CommandObject {
     this._numCompleted = 0;
     this._isRunning = false;
     this._isComplete = false;
-    // this._count = 0;
   }
 
   _onCompleteHandler = ($event: Event): void => {
@@ -62,9 +60,6 @@ export default class ParallelList extends CommandObject {
             this._commands.push(commands[j]);
           }
         }
-        //   } else if (typeof ($commands[i]) === 'string') {
-        //     _commands.push(new Command(console.log, ['[String][' + this.name + ']:' + this._count + ':' + $commands[i]]))
-        //     this._count++
       } else {
         this._commands.push(commands[i]);
       }

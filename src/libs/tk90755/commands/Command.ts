@@ -41,17 +41,22 @@ export default class Command extends CommandObject {
     this._timer = NaN;
   }
 
-  completeHandler(): void {
-    // this._dispatcher.removeEventListener(this._eventType, arguments.callee);
+  completeHandler(e: Event | undefined): void {
+    if (e !== undefined) {
+      const event: Event = e as Event;
+      const currentTarget: EventDispatcher = event.currentTarget;
+      const type: string = event.type;
+      const listener: (e: Event) => void = currentTarget.listener;
+      currentTarget.removeEventListener(type, listener);
+    }
     this.finish();
   }
 
   start(): void {
     const f = (): void => {
-      this._dispatcher.addEventListener(this._eventType, ()=>{
-        this.completeHandler()
+      this._dispatcher.addEventListener(this._eventType, () => {
+        this.completeHandler(undefined);
       });
-      // this._func.apply(null, arguments[0])
       this._func();
     };
 
@@ -65,7 +70,7 @@ export default class Command extends CommandObject {
   }
 
   stop(): void {
-    this.completeHandler();
+    this.completeHandler(undefined);
   }
 
   finish(): void {

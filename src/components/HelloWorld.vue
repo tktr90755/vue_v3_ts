@@ -39,9 +39,7 @@
 import Event from '@/libs/tk90755/events/Event';
 import EventDispatcher from '@/libs/tk90755/events/EventDispatcher';
 import Command from '@/libs/tk90755/commands/Command';
-// import ParallelList from '@/libs/tk90755/commands/ParallelList';
-import SerialList from '@/libs/tk90755/commands/SerialList';
-// import {Callback, ommandObject} from '@/libs/tk90755/commands/CommandObject'
+import Commands from '@/libs/tk90755/commands/Commands';
 import { defineComponent } from "vue";
 export default defineComponent({
   setup():void{
@@ -84,7 +82,7 @@ export default defineComponent({
     // console.log(MathUtils.normalize(50,0,100)); //0.5
     // console.log(MathUtils.normalize(21,10,20)); //1.1
     // const event:Event = new Event("aaa")
-    const dispatcher:EventDispatcher = new EventDispatcher()
+    
     // console.log(dispatcher);
     // const parallelList:ParallelList = new ParallelList("testSerialList");
     // parallelList._onCompleteHandler(new Event("aa"))
@@ -93,10 +91,9 @@ export default defineComponent({
     //   new Command( ()=>{console.log("func2Dispatch")}, dispatcher, "func2Dispatch",1  )
     // ])
     // parallelList.execute()
-
-    const serialList:SerialList = new SerialList("testSerialList");
-    serialList.debug = true;
-    serialList.push([
+    const dispatcher:EventDispatcher = new EventDispatcher()
+    const commands:Commands = new Commands("testSerialList", true);
+    commands.push([
       [
       new Command( ()=>{
         console.log("func1Dispatch")
@@ -110,7 +107,7 @@ export default defineComponent({
       }, dispatcher, "func2Dispatch",1  )
       ]
     ])
-    serialList.execute()
+    commands.execute()
 
     // com.start()
     // com.finish()
