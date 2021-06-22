@@ -41,7 +41,7 @@ export default class ParallelList extends CommandObject {
       );
     this._numCompleted++;
     if (this._numCompleted === this._commands.length) {
-      //   this.end()
+      this.end();
     }
   };
 
@@ -97,5 +97,11 @@ export default class ParallelList extends CommandObject {
     this._isRunning = false;
     this._isComplete = true;
     this.dispatchEvent(new Event(Event.COMPLETE));
+  }
+
+  // __________________________________________________________________________________
+  // getter & setter
+  get length(): number {
+    return this._commands.length;
   }
 }

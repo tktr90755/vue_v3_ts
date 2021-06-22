@@ -42,13 +42,15 @@ export default class Command extends CommandObject {
   }
 
   completeHandler(): void {
-    this._dispatcher.removeEventListener(this._eventType, this.completeHandler);
+    // this._dispatcher.removeEventListener(this._eventType, arguments.callee);
     this.finish();
   }
 
   start(): void {
     const f = (): void => {
-      this._dispatcher.addEventListener(this._eventType, this.completeHandler);
+      this._dispatcher.addEventListener(this._eventType, ()=>{
+        this.completeHandler()
+      });
       // this._func.apply(null, arguments[0])
       this._func();
     };
