@@ -33,85 +33,19 @@
 </template>
 
 <script lang="ts">
-// import ArrayUtils from '@/libs/tk90755/utils/ArrayUtils';
-// import DateUtils from '@/libs/tk90755/utils/DateUtils';
-// import MathUtils from '@/libs/tk90755/utils/MathUtils';
-import Event from '@/libs/tk90755/events/Event';
-import EventDispatcher from '@/libs/tk90755/events/EventDispatcher';
-import Command from '@/libs/tk90755/commands/Command';
-import Commands from '@/libs/tk90755/commands/Commands';
 import { defineComponent } from "vue";
+import Ticker from '@/libs/tk90755/display/ticker/Ticker';
 export default defineComponent({
   setup():void{
-    // console.log(ArrayUtils.findMax([1,2,3,4,5,6,7,8,9]));
-    // console.log(ArrayUtils.findMin([1,2,3,4,5,6,7,8,9]));
-    // // console.log(ArrayUtils.shuffle([1,2,3,4,5,6,7,8,9]));
-    // console.log(ArrayUtils.shuffleNumbers([1,2,3,4,5,6,7,8,9]));
-    // console.log(ArrayUtils.shuffleStrings(["1","2","3","4","5","6","7","8","9"]));
-    // console.log(ArrayUtils.inverse<string>(["1","2","3","4","5","6","7","8","9"]));
-    // console.log(ArrayUtils.inverse<number>([1,2,3,4,5,6,7,8,9]));
-    // console.log(ArrayUtils.inverse<number|string>([1,2,"3",4,5,6,7,8,9]));
-    // console.log(ArrayUtils.inverseNumbers([1,2,3,4,5,6,7,8,9]));
-    // console.log(ArrayUtils.inverseStrings(["1","2","3","4","5","6","7","8","9"]));
-    // console.log(ArrayUtils.random<string>(["1","2","3","4","5","6","7","8","9"])); // ["9", "8", "7", "6", "5", "4", "3", "2", "1"]
-    // console.log(ArrayUtils.random<number>([1,2,3,4,5,6,7,8,9]));                   // [9, 8, 7, 6, 5, 4, 3, 2, 1]
-    // console.log(ArrayUtils.random<number|string>([1,2,"3",4,5,6,7,8,9]));          // [9, 8, 7, 6, 5, 4, "3", 2, 1]
-    // console.log(ArrayUtils.randomNumber([1,2,3,4,5,6,7,8,9]));
-    // console.log(ArrayUtils.isContain<number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)); // true
-    // console.log(ArrayUtils.isContain<number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 10)); // false
-    // console.log(ArrayUtils.isContain<string>(["A", "B"], "A")); // true
-    // console.log(ArrayUtils.isContain<string>(["A", "B"], "C")); // false
-    // console.log(ArrayUtils.isContain<string|number>(["A", "B"], 99)); // false
-    // console.log(ArrayUtils.isContainInNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)); // true
-    // console.log(ArrayUtils.isContainInNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9], 10)); // false
-    // console.log(ArrayUtils.isContainInStrings(["A", "B"], "A")); // true
-    // console.log(ArrayUtils.isContainInStrings(["A", "B"], "C")); // false
-    // console.log(DateUtils.unixTime());
-    // console.log(DateUtils.unixTime(new Date( 2012, 11, 5, 3, 15, 30 ))); //1354644930000
-    // console.log(MathUtils.sign(46));  //  1 
-    // console.log(MathUtils.sign(-34)); // -1
-    // console.log(MathUtils.fract(46.39)); //0.39
-    // let i = 0;
-    // setInterval(() => {
-    //   i += 0.1;
-    //   MathUtils.omitFloat(i,1000);
-    // }, 100);
-    // console.log(MathUtils.factorial(4)); //
-    // console.log(MathUtils.inRange(12,10,20)); //true
-    // console.log(MathUtils.inRange(21,10,20)); //false
-    // console.log(MathUtils.normalize(50,0,100)); //0.5
-    // console.log(MathUtils.normalize(21,10,20)); //1.1
-    // const event:Event = new Event("aaa")
-    
-    // console.log(dispatcher);
-    // const parallelList:ParallelList = new ParallelList("testSerialList");
-    // parallelList._onCompleteHandler(new Event("aa"))
-    // parallelList.push([
-    //   new Command( ()=>{console.log("func1Dispatch")}, dispatcher, "func1Dispatch",1  ),
-    //   new Command( ()=>{console.log("func2Dispatch")}, dispatcher, "func2Dispatch",1  )
-    // ])
-    // parallelList.execute()
-    const dispatcher:EventDispatcher = new EventDispatcher()
-    const commands:Commands = new Commands("testSerialList", true);
-    commands.push([
-      [
-      new Command( ()=>{
-        console.log("func1Dispatch")
-        dispatcher.dispatchEvent(new Event('func1Dispatch'));
-      }, dispatcher, "func1Dispatch",1  ),
-      new Command( ()=>{
-        console.log("func2Dispatch")
-        setTimeout(()=>{
-          dispatcher.dispatchEvent(new Event('func2Dispatch'));
-        },2000)
-      }, dispatcher, "func2Dispatch",1  )
-      ]
-    ])
-    commands.execute()
-
-    // com.start()
-    // com.finish()
-    // com.concat<Arr>([1,2,3,3,4])
+    const ticker:Ticker = Ticker.instance;
+    ticker.add(():void=>{console.log("tick test:", Math.random())},"tickTest")
+    setTimeout(()=>{
+      if(ticker.has("tickTest"))ticker.kill("tickTest")
+      ticker.pause()
+    },1000)
+    setTimeout(()=>{
+      ticker.killAll()
+    },2000)
   }
 });
 
