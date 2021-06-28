@@ -18,6 +18,7 @@
     },1000)
     setTimeout(()=>{
       ticker.killAll()
+      ticker.useExRenderer = true;
     },2000)
  */
 import ITicker from "./ITicker";
@@ -70,5 +71,7 @@ export default class Ticker {
     if (value === false) this._renderer = Renderer.instance;
     else if (value === true) this._renderer = ExRenderer.instance;
     this._useExRenderer = value;
+    Renderer.instance.killAll();
+    ExRenderer.instance.killAll();
   }
 }

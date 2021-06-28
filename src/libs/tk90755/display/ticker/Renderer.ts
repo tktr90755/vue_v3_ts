@@ -11,15 +11,11 @@
 import ITicker from "./ITicker";
 export default class Renderer implements ITicker {
   private static _instance: Renderer;
-  private numListeners: number;
   private _listeners: { [s: string]: () => void };
   private _timer: number;
-  private fps: number;
   constructor() {
-    this.numListeners = 0;
     this._listeners = {};
     this._timer = 0;
-    this.fps = 60;
   }
 
   public static get instance(): Renderer {
@@ -30,43 +26,48 @@ export default class Renderer implements ITicker {
   public add(instance: () => void, id: string): void {
     if (this._listeners[id] === undefined) {
       this._listeners[id] = instance;
-      if (this.numListeners++ === 0) {
-        this.resume();
-      }
     } else {
       throw id +
         "というインスタンス名は" +
         this._listeners[id] +
         "において使用されています。";
     }
+    if (Object.keys(this._listeners).length !== 0) {
+      this._timer = window.requestAnimationFrame(() => { this.render() })
+    }
   }
 
   public kill(id: string): void {
     if (this.has(id)) {
-      if (--this.numListeners <= 0) this.pause();
       delete this._listeners[id];
     } else {
       throw id + "というインスタンスはリストに登録されていません。";
+    }
+    if (Object.keys(this._listeners).length === 0) {
+      window.cancelAnimationFrame(this._timer)
+      this._timer = 0
     }
   }
 
 	public killAll():void{
 		this.pause();
-    this.numListeners = 0;
     this._listeners = {};
-    this._timer = 0;
+    if (this._timer != 0) {
+      window.cancelAnimationFrame(this._timer)
+    }
+    this._timer = 0
 	}
 
   public pause(): void {
-    clearTimeout(this._timer);
-    this._timer = 0;
+    if (this._timer != 0) {
+      window.cancelAnimationFrame(this._timer)
+    }
+    this._timer = 0
   }
 
   public resume(): void {
-    if (this.numListeners !== 0) {
-      this._timer = setInterval((): void => {
-        this.render();
-      }, 1000 / this.fps);
+    if (Object.keys(this._listeners).length !== 0) {
+      this._timer = window.requestAnimationFrame(() => { this.render() })
     }
   }
 
@@ -77,6 +78,13 @@ export default class Renderer implements ITicker {
   private render(): void {
     for (const key in this._listeners) {
       this._listeners[key]();
+    }
+
+    if (Object.keys(this._listeners).length >= 1) {
+      window.cancelAnimationFrame(this._timer)
+      this._timer = window.requestAnimationFrame(() => {
+        this.render()
+      })
     }
   }
 }

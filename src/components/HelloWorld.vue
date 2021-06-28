@@ -38,13 +38,15 @@ import Ticker from '@/libs/tk90755/display/ticker/Ticker';
 export default defineComponent({
   setup():void{
     const ticker:Ticker = Ticker.instance;
+    ticker.useExRenderer = false;
     ticker.add(():void=>{console.log("tick test:", Math.random())},"tickTest")
     setTimeout(()=>{
-      if(ticker.has("tickTest"))ticker.kill("tickTest")
-      ticker.pause()
+      // if(ticker.has("tickTest"))ticker.kill("tickTest")
+      // ticker.pause()
     },1000)
     setTimeout(()=>{
-      ticker.killAll()
+      // ticker.killAll()
+      ticker.useExRenderer = true;
     },2000)
   }
 });
