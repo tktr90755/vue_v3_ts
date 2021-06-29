@@ -34,20 +34,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Ticker from '@/libs/tk90755/display/ticker/Ticker';
+// import Item from '@/libs/tk90755/utils/iterator/Item';
+import ArrayUtils from '@/libs/tk90755/utils/ArrayUtils';
 export default defineComponent({
   setup():void{
-    const ticker:Ticker = Ticker.instance;
-    ticker.useExRenderer = false;
-    ticker.add(():void=>{console.log("tick test:", Math.random())},"tickTest")
-    setTimeout(()=>{
-      // if(ticker.has("tickTest"))ticker.kill("tickTest")
-      // ticker.pause()
-    },1000)
-    setTimeout(()=>{
-      // ticker.killAll()
-      ticker.useExRenderer = true;
-    },2000)
+    // const item:Item = new Item(():void=>{console.log("test1")},"test1")
+    const arr:Array<string|number> = ["aaa",0]
+    console.log(ArrayUtils.copy<string|number>(arr))
   }
 });
 

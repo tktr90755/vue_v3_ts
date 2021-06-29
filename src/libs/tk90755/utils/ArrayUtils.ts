@@ -7,7 +7,7 @@
  * @author
  * @version 0.1.0
  * @update
-*/
+ */
 export default class ArrayUtils {
   constructor() {
     throw new Error("ArrayUtils is class only of static method.");
@@ -221,5 +221,26 @@ export default class ArrayUtils {
    */
   static isContainInStrings(ary: Array<string>, value: string): boolean {
     return ary.indexOf(value) != -1;
+  }
+
+  /**
+   * 配列のコピー
+   * @static
+   * @method isContainInStrings
+   * @param {array} ary 判定用配列
+   * @param {array} value ジャッジ
+   * @return {boolean} 
+   * @example 
+    const arr:Array<string> = ["aaa","bbb"]
+    console.log(ArrayUtils.copy(arr))
+    const arr2:Array<string|number> = ["aaa",0]
+    console.log(ArrayUtils.copy<string|number>(arr2))
+   */
+  static copy<T>(ary: Array<T>): Array<T> {
+    const newArr = [];
+    for (let i = 0; i < ary.length; i++) {
+      newArr.push(ary[i]);
+    }
+    return newArr;
   }
 }
