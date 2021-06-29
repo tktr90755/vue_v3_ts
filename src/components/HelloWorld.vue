@@ -34,13 +34,32 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-// import Item from '@/libs/tk90755/utils/iterator/Item';
-import ArrayUtils from '@/libs/tk90755/utils/ArrayUtils';
+import Item from '@/libs/tk90755/utils/iterator/Item';
+import Iterator from '@/libs/tk90755/utils/iterator/Iterator';
 export default defineComponent({
   setup():void{
-    // const item:Item = new Item(():void=>{console.log("test1")},"test1")
-    const arr:Array<string|number> = ["aaa",0]
-    console.log(ArrayUtils.copy<string|number>(arr))
+    var ite = new Iterator();
+    ite.addItem(new Item(():void=> { console.log("mc0"); }, "mc0"));
+    ite.addItem(new Item(():void=> { console.log("mc1"); }, "mc1"));
+    ite.addItem(new Item(():void=> { console.log("mc2"); }, "mc2"));
+    console.log("fastName:"+ite.fast().name);
+    console.log("lastName:"+ite.last().name);
+    setInterval(function(){
+      // console.log("random:"+ite.random().name);
+      // console.log("shuffle:"+ite.shuffle().name);
+
+      if(ite.hasNext()){
+        console.log("shuffle:"+ite.next().name);
+      }else{
+        console.log("shuffle:"+ite.fast().name);
+      }
+
+      // if(ite.hasPrev()){
+      //   console.log("next:"+ite.prev().name);
+      // }else{
+      //   console.log("prev:"+ite.last().name);
+      // }
+    }, 1000);
   }
 });
 
