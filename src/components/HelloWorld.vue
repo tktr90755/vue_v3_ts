@@ -35,31 +35,32 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Item from '@/libs/tk90755/utils/iterator/Item';
-import Iterator from '@/libs/tk90755/utils/iterator/Iterator';
+import Ref from '@/libs/tk90755/data/Ref';
 export default defineComponent({
   setup():void{
-    var ite = new Iterator();
-    ite.addItem(new Item(():void=> { console.log("mc0"); }, "mc0"));
-    ite.addItem(new Item(():void=> { console.log("mc1"); }, "mc1"));
-    ite.addItem(new Item(():void=> { console.log("mc2"); }, "mc2"));
-    console.log("fastName:"+ite.fast().name);
-    console.log("lastName:"+ite.last().name);
-    setInterval(function(){
-      // console.log("random:"+ite.random().name);
-      // console.log("shuffle:"+ite.shuffle().name);
+    const ref:Ref = Ref.instance;
+    ref.set(():void=>{console.log("@@@")},"func")
+    ref.set("str hoge","str")
+    ref.set(10,"num")
+    ref.set(new Item(():void=>{console.log("Item kitayo!")}, "mc0"),"item")
 
-      if(ite.hasNext()){
-        console.log("shuffle:"+ite.next().name);
-      }else{
-        console.log("shuffle:"+ite.fast().name);
-      }
 
-      // if(ite.hasPrev()){
-      //   console.log("next:"+ite.prev().name);
-      // }else{
-      //   console.log("prev:"+ite.last().name);
-      // }
-    }, 1000);
+    const func:()=>void = ref.get("func") as ()=>void
+    const str:string = ref.get("str") as string
+    const num:number = ref.get("num") as number
+    const item:Item = ref.get("item") as Item
+
+    func()
+    console.log(str + str)
+    console.log(num + num)
+    console.log(item.name)
+
+    ref.kill("str")
+    console.log(ref.get("str"))
+    ref.killAll()
+    console.log(ref.get("func"))
+    console.log(ref.get("num"))
+    console.log(ref.get("item"))
   }
 });
 
